@@ -1,0 +1,32 @@
+<h1>プロフィールの編集</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@user) do |f| %>
+
+      <%= f.label :name, "お名前" %>
+      <%= f.text_field :name, class: "form-control" %>
+
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.text_field :email, class: "form-control" %>
+      
+      <%= f.label :introduction, "自己紹介" %>
+      <%= f.text_area :introduction, class: "form-control", rows: "3" %>
+      
+      <%= f.label :place, "現在地" %>
+      <%= f.text_field :place, class: "form-control", :placeholder => "東京" %>
+      
+      <%= f.label :homepage, "Webサイト" %>
+      <%= f.text_field :homepage, class: "form-control", :placeholder => "http://yoursite.com" %>
+      
+      <%= f.label :birthday, "誕生日" %>
+      <div class="form-inline">
+        <div class="form-group">
+          <%= raw sprintf(f.date_select(:birthday, {:use_month_numbers=>true, :date_separator => '%s', :start_year=>1930, :end_year => Time.now.year, :default =>'1990-1-1'.to_date}, {class: "form-control"}), '年','月') + '日' %>
+        </div>
+      </div>
+    
+      <%= f.submit class: "btn btn-sm btn-primary" %>
+    <% end %>
+  </div>
+</div>

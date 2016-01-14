@@ -19,10 +19,8 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to the Sample App!"
       session[:user_id] = @user.id
       redirect_to @user
-      return
     else
       render 'new'
-      return
     end
   end
   
@@ -40,11 +38,9 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       # 保存に成功した場合はトップページへリダイレクト
       render 'show', notice: 'メッセージを編集しました'
-      return
     else
       # 保存に失敗した場合は編集画面へ戻す
       render 'edit'
-      return
     end
   end
   

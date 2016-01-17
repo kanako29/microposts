@@ -1,35 +1,44 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-  <h1>
-    <%= gravatar_for @user %>
-    <%= @user.name %>
-  </h1>
-  
-  <table class="table">
-    <tr>
-      <th>名前</th>
-      <td><%= @user.name %></td>
-    </tr>
-    <tr>
-      <th>メールアドレス</th>
-      <td><%= @user.email %></td>
-    </tr>
-    <tr>
-      <th>自己紹介</th>
-      <td><%= @user.introduction %></td>
-    </tr>
-    <tr>
-      <th>現在地</th>
-      <td><%= @user.place %></td>
-    </tr>
-    <tr>
-      <th>Webサイト</th>
-      <td><%= @user.homepage %></td>
-    </tr>
-    <tr>
-      <th>誕生日</th>
-      <td><%= @user.birthday.try(:strftime, "%Y年 %1m月 %1d日") %></td>
-    </tr>
-  </table>
-
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <table class="table">
+      <tr>
+        <th>名前</th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>自己紹介</th>
+        <td><%= @user.introduction %></td>
+      </tr>
+      <tr>
+        <th>現在地</th>
+        <td><%= @user.place %></td>
+      </tr>
+      <tr>
+        <th>Webサイト</th>
+        <td><%= @user.homepage %></td>
+      </tr>
+      <tr>
+        <th>誕生日</th>
+        <td><%= @user.birthday.try(:strftime, "%Y年 %1m月 %1d日") %></td>
+      </tr>
+    </table>
+  </aside>
+  <div class="col-md-8">
+    <% if @user.microposts.any? %>
+      <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @microposts %>
+      </ol>
+    <% end %>
+  </div>
 </div>

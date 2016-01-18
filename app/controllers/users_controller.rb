@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+                                        :followings, :followers]
+  before_action :admin_user, only: :destroy
 
   def index
     @user = User.new
@@ -45,7 +48,24 @@ class UsersController < ApplicationController
     end
   end
   
+  def followings
+    @title = "Followings"
+    @user  = User.find(params[:id])
+    @users = @user.following_users
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.follower_users
+    render 'show_follow'
+  end
+  
   private
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
 
   def user_params
     params.require(:user).permit(:name, :email, :introduction, :place, :homepage, :birthday, :password,

@@ -62,6 +62,14 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
   
+  def favorite
+    @title = 'Favorite Microposts'
+    @user  = User.find(params[:id])
+    @micropost = @user.microposts.build
+    @feed_favorites = @user.favorite_microposts.page params[:page]
+    render 'show_favorite'
+  end
+  
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
